@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Editable Crossword Puzzle with Grid and Clues</title>
+  <title>step 3: finish the puzzle, go back to the stand and give them the password so you proceed</title>
   <style>
     body {
       display: flex;
@@ -197,5 +197,36 @@
       <td class="black"></td>
     </tr>
   </table>
+
+  <script>
+    const answers = [
+      "LOCK", "CODE", "BUG", "EMAIL", "USER",
+      "PASS", "LOGIN", "ACCESS", "DEVICE", "DATA"
+    ];
+
+    function checkRow(rowIndex) {
+      const table = document.querySelector("table");
+      const row = table.rows[rowIndex];
+      const inputs = Array.from(row.querySelectorAll("input"));
+
+      if (inputs.some(input => input.value === "")) return;
+
+      const userWord = inputs.map(input => input.value.toUpperCase()).join("");
+      const isCorrect = userWord === answers[rowIndex];
+
+      row.style.transition = "background-color 0.3s";
+      row.style.backgroundColor = isCorrect ? "lightgreen" : "#f88";
+
+      setTimeout(() => {
+        row.style.backgroundColor = "";
+      }, 500);
+    }
+
+    document.querySelectorAll("table tr").forEach((tr, index) => {
+      tr.querySelectorAll("input").forEach(input => {
+        input.addEventListener("input", () => checkRow(index));
+      });
+    });
+  </script>
 </body>
 </html>

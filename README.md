@@ -1,1 +1,1 @@
-cyber dd
+a simple crossworls puzzle i made for cybersicca club
